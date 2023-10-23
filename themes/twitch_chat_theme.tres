@@ -1,0 +1,37 @@
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://u2wxlscnkbkn"]
+
+[ext_resource type="StyleBox" uid="uid://bgcxxcifijnbv" path="res://themes/TwitchChat/highlight-purple.tres" id="1_e4d4j"]
+[ext_resource type="FontFile" uid="uid://cl0wwym51p13c" path="res://fonts/Noto_Sans/NotoSans-ExtraBold.ttf" id="2_o26l5"]
+[ext_resource type="FontFile" uid="uid://b7mja7toecm4a" path="res://fonts/Noto_Sans/NotoSans-SemiBold.ttf" id="2_qij80"]
+[ext_resource type="FontFile" uid="uid://bnobrnu2ah5m5" path="res://fonts/Noto_Sans/NotoSans-ExtraBoldItalic.ttf" id="3_5ly1c"]
+[ext_resource type="FontFile" uid="uid://dw1mgu3bj05tu" path="res://fonts/Noto_Sans/NotoSans-SemiBoldItalic.ttf" id="4_ui2mm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_msvfr"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.568627, 0.278431, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4du1p"]
+bg_color = Color(0.0941176, 0.0941176, 0.105882, 1)
+
+[resource]
+default_font = ExtResource("2_qij80")
+Button/styles/normal = ExtResource("1_e4d4j")
+LineEdit/colors/selection_color = Color(0.0470588, 0.411765, 0.85098, 1)
+LineEdit/styles/focus = SubResource("StyleBoxFlat_msvfr")
+Panel/styles/panel = SubResource("StyleBoxFlat_4du1p")
+RichTextLabel/colors/selection_color = Color(0.0470588, 0.411765, 0.85098, 1)
+RichTextLabel/fonts/bold_font = ExtResource("2_o26l5")
+RichTextLabel/fonts/bold_italics_font = ExtResource("3_5ly1c")
+RichTextLabel/fonts/italics_font = ExtResource("4_ui2mm")

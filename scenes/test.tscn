@@ -1,0 +1,357 @@
+[gd_scene load_steps=17 format=3 uid="uid://q6oytuo3xoqx"]
+
+[ext_resource type="Script" path="res://scripts/game-controller.gd" id="1_xr22s"]
+[ext_resource type="Script" path="res://Global/twitch/twitch_api.gd" id="2_togrx"]
+[ext_resource type="Script" path="res://Global/twitch/auth_server.gd" id="3_icae8"]
+[ext_resource type="Script" path="res://Global/twitch/twitch_chat.gd" id="4_3c1a3"]
+[ext_resource type="Theme" uid="uid://05ag5bwajdwy" path="res://themes/main_theme.tres" id="5_8rbbj"]
+[ext_resource type="Theme" uid="uid://u2wxlscnkbkn" path="res://themes/twitch_chat_theme.tres" id="6_icwl2"]
+[ext_resource type="Script" path="res://scripts/Uptime.gd" id="6_rteye"]
+[ext_resource type="Texture2D" uid="uid://ll2cgiu1cn7f" path="res://sprites/audio_bar_under.png" id="7_3hsr1"]
+[ext_resource type="Script" path="res://scripts/ChatContainer.gd" id="7_403v7"]
+[ext_resource type="Script" path="res://scripts/audio_bar.gd" id="7_kgt1u"]
+[ext_resource type="Texture2D" uid="uid://ccegyop10c0sm" path="res://sprites/audio_bar_over.png" id="8_mmp1w"]
+[ext_resource type="Script" path="res://scripts/SendMessageController.gd" id="8_r3ba2"]
+[ext_resource type="Script" path="res://scripts/Debug.gd" id="13_t4w50"]
+[ext_resource type="Script" path="res://scripts/Stalker.gd" id="14_jd82x"]
+
+[sub_resource type="AudioStreamMicrophone" id="AudioStreamMicrophone_c304r"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aggiv"]
+bg_color = Color(0.0941176, 0.0941176, 0.105882, 0.721569)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.713726, 0.713726, 0.713726, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="world" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xr22s")
+
+[node name="TwitchAPI" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_togrx")
+
+[node name="AuthServer" type="Node" parent="TwitchAPI"]
+script = ExtResource("3_icae8")
+
+[node name="TwitchChat" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("4_3c1a3")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="App" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("5_8rbbj")
+
+[node name="AppBasicLayout" type="HBoxContainer" parent="CanvasLayer/App"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ControlContainer" type="VBoxContainer" parent="CanvasLayer/App/AppBasicLayout"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/App/AppBasicLayout/ControlContainer"]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="CanvasLayer/App/AppBasicLayout/ControlContainer/MarginContainer"]
+custom_minimum_size = Vector2(500, 300)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Panel" type="Panel" parent="CanvasLayer/App/AppBasicLayout/ControlContainer/MarginContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 41.0
+offset_top = 36.0
+offset_right = -36.0
+offset_bottom = -53.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/App/AppBasicLayout/ControlContainer/MarginContainer/Panel/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+text = ">> YOUR CAMERA HERE <<"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="CanvasLayer/App/AppBasicLayout/ControlContainer/MarginContainer/Panel"]
+layout_mode = 1
+offset_right = 249.0
+offset_bottom = 31.0
+theme_override_font_sizes/font_size = 20
+text = "Streamer name (but cute)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Uptime" type="Label" parent="CanvasLayer/App/AppBasicLayout/ControlContainer/MarginContainer/Panel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -134.0
+offset_top = -31.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 20
+text = "Uptime: 00:00"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("6_rteye")
+
+[node name="Label4" type="Label" parent="CanvasLayer/App/AppBasicLayout/ControlContainer/MarginContainer/Panel"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+offset_right = 134.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 20
+text = "!commands"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/App/AppBasicLayout/ControlContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Panel2" type="Panel" parent="CanvasLayer/App/AppBasicLayout/ControlContainer/MarginContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TabContainer" type="TabContainer" parent="CanvasLayer/App/AppBasicLayout/ControlContainer/MarginContainer2/Panel2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+drag_to_rearrange_enabled = true
+
+[node name="Sound" type="TabBar" parent="CanvasLayer/App/AppBasicLayout/ControlContainer/MarginContainer2/Panel2/TabContainer"]
+layout_mode = 2
+drag_to_rearrange_enabled = true
+script = ExtResource("7_kgt1u")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/App/AppBasicLayout/ControlContainer/MarginContainer2/Panel2/TabContainer/Sound"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="CanvasLayer/App/AppBasicLayout/ControlContainer/MarginContainer2/Panel2/TabContainer/Sound/VBoxContainer"]
+layout_mode = 2
+text = "Sound"
+
+[node name="HSeparator2" type="HSeparator" parent="CanvasLayer/App/AppBasicLayout/ControlContainer/MarginContainer2/Panel2/TabContainer/Sound/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="OptionMics" type="OptionButton" parent="CanvasLayer/App/AppBasicLayout/ControlContainer/MarginContainer2/Panel2/TabContainer/Sound/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/App/AppBasicLayout/ControlContainer/MarginContainer2/Panel2/TabContainer/Sound/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CanvasLayer/App/AppBasicLayout/ControlContainer/MarginContainer2/Panel2/TabContainer/Sound/VBoxContainer"]
+stream = SubResource("AudioStreamMicrophone_c304r")
+autoplay = true
+bus = &"Capture"
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer/App/AppBasicLayout/ControlContainer/MarginContainer2/Panel2/TabContainer/Sound/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+max_value = 1.0
+step = 0.01
+value = 0.5
+texture_under = ExtResource("7_3hsr1")
+texture_progress = ExtResource("8_mmp1w")
+
+[node name="HSeparator3" type="HSeparator" parent="CanvasLayer/App/AppBasicLayout/ControlContainer/MarginContainer2/Panel2/TabContainer/Sound/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="Profile" type="TabBar" parent="CanvasLayer/App/AppBasicLayout/ControlContainer/MarginContainer2/Panel2/TabContainer"]
+visible = false
+layout_mode = 2
+drag_to_rearrange_enabled = true
+
+[node name="Label2" type="Label" parent="CanvasLayer/App/AppBasicLayout/ControlContainer/MarginContainer2/Panel2/TabContainer/Profile"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Profile"
+
+[node name="Scenes" type="TabBar" parent="CanvasLayer/App/AppBasicLayout/ControlContainer/MarginContainer2/Panel2/TabContainer"]
+visible = false
+layout_mode = 2
+drag_to_rearrange_enabled = true
+
+[node name="Label3" type="Label" parent="CanvasLayer/App/AppBasicLayout/ControlContainer/MarginContainer2/Panel2/TabContainer/Scenes"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Scenes"
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/App/AppBasicLayout/ControlContainer/MarginContainer2/Panel2"]
+layout_mode = 2
+offset_right = 400.0
+
+[node name="ChatMarginContainer" type="MarginContainer" parent="CanvasLayer/App/AppBasicLayout"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="ChatContainer" type="VBoxContainer" parent="CanvasLayer/App/AppBasicLayout/ChatMarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("6_icwl2")
+script = ExtResource("7_403v7")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/App/AppBasicLayout/ChatMarginContainer/ChatContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Chat" type="Panel" parent="CanvasLayer/App/AppBasicLayout/ChatMarginContainer/ChatContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("6_icwl2")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/App/AppBasicLayout/ChatMarginContainer/ChatContainer/MarginContainer/Chat"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_icwl2")
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/App/AppBasicLayout/ChatMarginContainer/ChatContainer/MarginContainer/Chat/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("6_icwl2")
+
+[node name="ChatMessageContainer" type="VBoxContainer" parent="CanvasLayer/App/AppBasicLayout/ChatMarginContainer/ChatContainer/MarginContainer/Chat/MarginContainer/ScrollContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("6_icwl2")
+
+[node name="NewMessagesLabel" type="Button" parent="CanvasLayer/App/AppBasicLayout/ChatMarginContainer/ChatContainer/MarginContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.435294, 0.435294, 0.435294, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_aggiv")
+text = " There are new messages "
+
+[node name="SendMessageController" type="HBoxContainer" parent="CanvasLayer/App/AppBasicLayout/ChatMarginContainer/ChatContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("8_r3ba2")
+
+[node name="LineEdit" type="LineEdit" parent="CanvasLayer/App/AppBasicLayout/ChatMarginContainer/ChatContainer/SendMessageController"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Send a message"
+caret_blink = true
+
+[node name="Button" type="Button" parent="CanvasLayer/App/AppBasicLayout/ChatMarginContainer/ChatContainer/SendMessageController"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Send"
+
+[node name="Debug" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="Debug"]
+custom_minimum_size = Vector2(100, 0)
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 248.0
+grow_vertical = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Debug/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("13_t4w50")
+
+[node name="Stalker" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("14_jd82x")
+
+[node name="delay_between_messages" type="Timer" parent="Stalker"]
+
+[connection signal="on_token_received" from="TwitchAPI" to="." method="_on_twitch_api_on_token_received"]
+[connection signal="OnTokenReceived" from="TwitchAPI/AuthServer" to="TwitchAPI" method="_on_auth_server_on_token_received"]
+[connection signal="OnMessage" from="TwitchChat" to="." method="_on_twitch_chat_on_message"]
+[connection signal="threshold_reached" from="CanvasLayer/App/AppBasicLayout/ControlContainer/MarginContainer2/Panel2/TabContainer/Sound" to="." method="_on_sound_threshold_reached"]
+[connection signal="threshold_reached" from="CanvasLayer/App/AppBasicLayout/ControlContainer/MarginContainer2/Panel2/TabContainer/Sound" to="Stalker" method="_on_sound_threshold_reached"]
+[connection signal="item_selected" from="CanvasLayer/App/AppBasicLayout/ControlContainer/MarginContainer2/Panel2/TabContainer/Sound/VBoxContainer/OptionMics" to="CanvasLayer/App/AppBasicLayout/ControlContainer/MarginContainer2/Panel2/TabContainer/Sound" method="_on_option_mics_item_selected"]
+[connection signal="scroll_ended" from="CanvasLayer/App/AppBasicLayout/ChatMarginContainer/ChatContainer/MarginContainer/Chat/MarginContainer/ScrollContainer" to="CanvasLayer/App/AppBasicLayout/ChatMarginContainer/ChatContainer" method="_on_scroll_container_scroll_ended"]
+[connection signal="pressed" from="CanvasLayer/App/AppBasicLayout/ChatMarginContainer/ChatContainer/MarginContainer/NewMessagesLabel" to="CanvasLayer/App/AppBasicLayout/ChatMarginContainer/ChatContainer" method="_on_new_messages_label_pressed"]
+[connection signal="text_submitted" from="CanvasLayer/App/AppBasicLayout/ChatMarginContainer/ChatContainer/SendMessageController/LineEdit" to="CanvasLayer/App/AppBasicLayout/ChatMarginContainer/ChatContainer/SendMessageController" method="_on_line_edit_text_submitted"]
+[connection signal="pressed" from="CanvasLayer/App/AppBasicLayout/ChatMarginContainer/ChatContainer/SendMessageController/Button" to="CanvasLayer/App/AppBasicLayout/ChatMarginContainer/ChatContainer/SendMessageController" method="_on_button_pressed"]
+[connection signal="timeout" from="Stalker/delay_between_messages" to="Stalker" method="_on_delay_between_messages_timeout"]

@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://cew8tj6hsgvja"]
+
+[ext_resource type="PackedScene" uid="uid://cdgrgnx07k5c" path="res://nodes/ChatMessage.tscn" id="1_d8kfh"]
+[ext_resource type="Script" path="res://scripts/StalkerMessage.gd" id="2_fu812"]
+
+[node name="StalkerMessage" instance=ExtResource("1_d8kfh")]
+script = ExtResource("2_fu812")

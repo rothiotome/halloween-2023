@@ -1,0 +1,16 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://05ag5bwajdwy"]
+
+[ext_resource type="StyleBox" uid="uid://b21eyqj87a332" path="res://themes/OBS/interactive-hover.tres" id="1_8un36"]
+[ext_resource type="StyleBox" uid="uid://c5qt83udls80t" path="res://themes/OBS/interactive-light.tres" id="2_a7ud6"]
+[ext_resource type="StyleBox" uid="uid://hv6oemi8f2o6" path="res://themes/OBS/interactive-selected.tres" id="3_6hpq8"]
+[ext_resource type="StyleBox" uid="uid://cr0br70rmycld" path="res://themes/OBS/background-light.tres" id="4_inxw3"]
+
+[resource]
+Button/styles/hover = ExtResource("1_8un36")
+Button/styles/normal = ExtResource("2_a7ud6")
+Button/styles/pressed = ExtResource("3_6hpq8")
+MarginContainer/constants/margin_bottom = 5
+MarginContainer/constants/margin_left = 5
+MarginContainer/constants/margin_right = 5
+MarginContainer/constants/margin_top = 5
+Panel/styles/panel = ExtResource("4_inxw3")
